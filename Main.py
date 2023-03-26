@@ -66,15 +66,7 @@ if __name__ == "__main__":
     while True:
         query=microinput().lower()
 
-        if 'wikipedia' in query:
-            speak('searching wikipedia...')
-            query=query.replace('wikipedia','')
-            results=wikipedia.summary(query,sentences=2)
-            speak("according to wikipedia")
-            print(results)
-            speak(results)
-
-        elif 'youtube' in query:
+        if 'youtube' in query:
             search=query.replace('youtube' and 'search for','')
             speak("opening youtube in browser")
             webbrowser.open(f'https://www.youtube.com/results?search_query={search}')
@@ -83,10 +75,10 @@ if __name__ == "__main__":
             speak("opening google in browser")
             webbrowser.open('www.google.com')
 
-        elif 'gaana' in query or 'ghana' in query or 'gana' in query:
-            search=query.replace('in gaana'and'play'and 'gana' and 'ghana','')
-            speak("opening gaana in browser")
-            webbrowser.open(f'https://gaana.com/search/{search}')
+        elif 'spotify' in query or 'sportify' in query or 'spot if five' in query:
+            search=query.replace('in spotify'and'play'and 'spotrtify' and 'spot if five','')
+            speak("opening spotify in browser")
+            webbrowser.open(f'https://open.spotify.com/search/{search}')
 
         elif 'open facebook' in query:
             speak("opening facebook in browser")
@@ -202,6 +194,14 @@ if __name__ == "__main__":
         elif "your name"  in query:
             speak('my name is falcon')
 
-        elif 'quit' in query:
+        elif 'quit' in query or 'exit' in query or'go now' in query or'thank you' in query  :
             speak("have a great day!!")
             exit()
+
+        else :
+            speak('searching wikipedia...')
+            query=query.replace('wikipedia','')
+            results=wikipedia.summary(query,sentences=2)
+            speak("according to wikipedia")
+            print(results)
+            speak(results)
