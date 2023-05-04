@@ -8,6 +8,10 @@ import smtplib
 import random
 import cv2
 import time
+import customtkinter
+from PIL import Image, ImageTk
+
+
 
 engine=pyttsx3.init('sapi5')
 voices=engine.getProperty('voices')
@@ -38,6 +42,7 @@ def microinput():
     try:
         print('recognizing....')
         query=r.recognize_google(audio,language='en-in')
+        time.sleep(5)
         print(f'user said : {query} \n')
         if 'yes' in query :
             speak('searching ....')
@@ -45,7 +50,6 @@ def microinput():
 
     except Exception as e:
         # print(e)
-        time.sleep(5)
         speak('can you please speak up....')
         print('can you please speak up....')
         return "None"
@@ -61,7 +65,7 @@ def sendmail(to,content):
 
 
 
-if __name__ == "__main__":
+def launch():
     greet()
     while True:
         query=microinput().lower()
@@ -205,3 +209,24 @@ if __name__ == "__main__":
             speak("according to wikipedia")
             print(results)
             speak(results)
+
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("green")
+
+root = customtkinter.CTk()
+# root.geometry("1000x1000")
+
+frame = customtkinter.CTkFrame(master=root)
+frame.pack(pady=20, padx=60, fill="both", expand=True)
+
+lable = customtkinter.CTkLabel(master=frame, text="Falcon Your AI Assistant")
+lable.pack(pady=12, padx=10)
+
+button = customtkinter.CTkButton(master=frame, text='Talk to me', command=launch) # add command
+button.pack(pady=12, padx=10)
+
+image= ImageTk.PhotoImage(Image.open("./bot.png"))
+button2 = customtkinter.CTkButton(master=frame, text="",  image=image) # add command
+button2.pack(pady=12, padx=10)
+
+root.mainloop()
