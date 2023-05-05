@@ -42,7 +42,6 @@ def microinput():
     try:
         print('recognizing....')
         query=r.recognize_google(audio,language='en-in')
-        time.sleep(5)
         print(f'user said : {query} \n')
         if 'yes' in query :
             speak('searching ....')
@@ -50,6 +49,7 @@ def microinput():
 
     except Exception as e:
         # print(e)
+        time.sleep(5)
         speak('can you please speak up....')
         print('can you please speak up....')
         return "None"
@@ -59,7 +59,7 @@ def sendmail(to,content):
     server=smtplib.SMTP('smpt.gmail.com', 465)
     server.ehlo()
     server.starttls()
-    server.login('amazinganirudhhere@gmail.com','ok')
+    server.login('amazinganirudhhere@gmail.com','password')
     server.sendmail('amazinganirudhhere@gmail.com',to,content)
     server.close()
 
@@ -202,7 +202,7 @@ def launch():
             speak("have a great day!!")
             exit()
 
-        else :
+        elif 'wikipedia' in query :
             speak('searching wikipedia...')
             query=query.replace('wikipedia','')
             results=wikipedia.summary(query,sentences=2)
