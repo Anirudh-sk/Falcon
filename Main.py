@@ -48,7 +48,22 @@ def get_response(user_input, corpus):
     tfidf_input = tfidf_vectorizer.transform([processed_input])
     similarity_scores = cosine_similarity(tfidf_input, tfidf)
     index = similarity_scores.argmax()
-    return corpus[index]
+    index2=[]
+    newsim=(-similarity_scores).argsort()
+    # print(newsim)
+    for i in newsim:
+        index2.append(i)
+    # print(index2,"index1")
+
+    response=[]
+    for i in index2 :
+        for j in range(3):
+            # print(i[j], "I value")
+            # print(corpus[index])
+            # print(corpus[i[j]])
+            response.append(corpus[i[j]])
+    print("Response","".join(response))
+    return " ".join(response),max(similarity_scores[0])
 
 
 
@@ -105,7 +120,7 @@ def sendmail(to,content):
 
 
 def launch():
-    greet()
+    # greet()
     try:
         while True:
             query=microinput().lower()
@@ -256,10 +271,14 @@ def launch():
                 corpus=corpus1.join(corpus)
                 corpus = nltk.sent_tokenize(corpus)
                 corpus = [sentence for sentence in corpus]           
-                response = get_response(query, corpus)
+                response,score = get_response(query, corpus)
+                score = score*100
                 # print the response
                 speak(response)
                 print(response)
+                print(score)
+                speak(f"The similarity score is {score}")
+
     except:
         speak("could not process the input can we try again click on Talk to me button to talk again")
         
