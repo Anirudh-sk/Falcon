@@ -57,7 +57,7 @@ def get_response(user_input, corpus):
 
     response=[]
     for i in index2 :
-        for j in range(3):
+        for j in range(4):
             # print(i[j], "I value")
             # print(corpus[index])
             # print(corpus[i[j]])
