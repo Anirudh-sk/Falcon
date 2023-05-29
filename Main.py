@@ -120,7 +120,7 @@ def sendmail(to,content):
 
 
 def launch():
-    # greet()
+    greet()
     try:
         while True:
             query=microinput().lower()
